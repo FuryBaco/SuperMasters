@@ -26,12 +26,18 @@ public class Empleado {
 	private String correo;
 
 	@Getter @Setter
+	@ManyToOne
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
+	@Getter @Setter
 	@Column(name = "rol", length = 50, nullable = false)
 	private String rol;
 
-	public Empleado(String nombre, String correo, String rol) {
+	public Empleado(String nombre, String correo, Empresa empresa, String rol) {
 		this.nombre = nombre;
 		this.correo = correo;
+		this.empresa = empresa;
 		this.rol = rol;
 	}
 }
