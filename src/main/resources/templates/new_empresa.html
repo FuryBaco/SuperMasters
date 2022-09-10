@@ -21,7 +21,7 @@
 <body>
 <div class="container-fluid">
 <h1> Agregar una nueva empresa</h1>
-<form action="#" th:action="@{/empresas}" th:object="${empresa}" method="post">
+<form action="#" th:action="@{/empresas/save}" th:object="${empresa}" method="post">
   <div class="form-group">
     <label class="control-label" for="nombre">Nombre:</label>
     <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="required">
