@@ -31,6 +31,7 @@
             <th>Nit</th>
             <th>Editar</th>
             <th>Eliminar</th>
+            <th>Empleados</th>
         </tr>
         <tr th:each="empresa: ${empresas}">
             <td th:text="${empresa.id}"></td>
@@ -48,11 +49,19 @@
                     <a th:href="@{/empresas/delete/{id}(id=${empresa.id})}">Eliminar</a>
                 </button>
             </td>
+            <td>
+                <button class="btn btn-primary" type="button">
+                    <a th:href="@{/empleados/empresa/{id}(id=${empresa.id})}">Empleados</a>
+                </button>
         </tr>
     </table>
     <td>
         <button class="btn btn-primary" type="button">
             <a th:href="@{/empresas/new}">Agregar Empresa</a>
+        </button>
+
+        <button class="btn btn-primary" type="button">
+            <a th:href="@{/empleados}">Empleados</a>
         </button>
     </td>
 </div>

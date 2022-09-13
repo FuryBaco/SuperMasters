@@ -88,4 +88,13 @@ public class EmpleadoCont {
 		return "redirect:/empleados";
 	}
 
+	//Mostrar todos los empleados de una empresa en HTML
+	@GetMapping("/empleados/empresa/{id}")
+	public String viewEmpleadosEmpresa(Model model, @ModelAttribute("message") String message, @PathVariable() Long id) {
+		List<Empleado> empleados = empleadoServ.getByEmpresa(id);
+		model.addAttribute("empleados", empleados);
+		model.addAttribute("message", message);
+		return "empleados"; //Llamamos al archivo empleados.html en la carpeta templates (resources/templates)
+	}
+
 }
