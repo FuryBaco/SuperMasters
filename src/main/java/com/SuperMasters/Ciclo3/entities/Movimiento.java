@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "movimiento")
@@ -14,7 +17,7 @@ import javax.persistence.*;
 public class Movimiento {
 
 	@Id
-	@Getter
+	@Getter @Setter
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -36,4 +39,9 @@ public class Movimiento {
 		this.concepto = concepto;
 		this.empleado = empleado;
 	}
+
+	@LastModifiedDate
+	private Date updateAt = new Date();
+	@CreatedDate
+	private Date createdAt = new Date();
 }

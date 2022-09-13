@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><title>Empresas</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- CSS only -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script crossorigin="anonymous"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <h1> Edite los datos de esta empresa</h1>
+    <form action="#" th:method="patch" th:action="@{/empresas/update}" th:object="${empresa}">
+        <div class="form-group">
+            <label class="control-label" for="id">Id:</label>
+            <input class="form-control" id="id" readonly required="required" th:field="*{id}" type="text">
+            <div class="form-group">
+                <label class="control-label" for="nombre">Nombre:</label>
+                <input class="form-control" id="nombre" required="required" th:field="*{nombre}" type="text">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="direccion">Dirección:</label>
+                <input class="form-control" id="direccion" required="required" th:field="*{direccion}" type="text">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="telefono">Telefono:</label>
+                <input class="form-control" id="telefono" required="required" th:field="*{telefono}" type="text">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="nit">Nit:</label>
+                <input class="form-control" id="nit" required="required" th:field="*{nit}" type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Actualizar</button>
+        </div>
+    </form>
+
+</div>
+</body>
+
+</html>

@@ -25,12 +25,11 @@ public class EmpresaServ {
 
 	//Guardar y/o actualizar empresa
 	public boolean saveOrUpdate(Empresa empresa){
-		try{
-			empresaRepo.save(empresa);
+		Empresa emp=empresaRepo.save(empresa);
+		if (empresaRepo.findById(emp.getId())!=null){
 			return true;
-		}catch (Exception e){
-			return false;
 		}
+		return false;
 	}
 
 	//Eliminar empresa

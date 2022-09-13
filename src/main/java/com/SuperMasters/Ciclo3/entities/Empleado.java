@@ -4,8 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor @ToString
@@ -13,7 +16,7 @@ import javax.persistence.*;
 public class Empleado {
 
 	@Id
-	@Getter
+	@Getter @Setter
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -40,4 +43,11 @@ public class Empleado {
 		this.empresa = empresa;
 		this.rol = rol;
 	}
+
+	@Getter
+	@LastModifiedDate
+	private Date updateAt = new Date();
+	@Getter
+	@CreatedDate
+	private Date createdAt = new Date();
 }
