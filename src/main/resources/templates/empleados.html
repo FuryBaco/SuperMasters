@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Empresas</title>
+    <title>Empleados</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -21,38 +21,38 @@
 </head>
 
 <body>
-<div class="container-fluid"><h1> Lista de Empresas</h1><!--Dibujamos la tabla-->
+<div class="container-fluid"><h1> Lista de Empleados</h1><!--Dibujamos la tabla-->
     <table class="table">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Telefono</th>
-            <th>Nit</th>
+            <th>Correo</th>
+            <th>Empresa</th>
+            <th>Rol</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
-        <tr th:each="empresa: ${empresas}">
-            <td th:text="${empresa.id}"></td>
-            <td th:text="${empresa.nombre}"></td>
-            <td th:text="${empresa.direccion}"></td>
-            <td th:text="${empresa.telefono}"></td>
-            <td th:text="${empresa.nit}"></td>
+        <tr th:each="empleado: ${empleados}">
+            <td th:text="${empleado.id}"></td>
+            <td th:text="${empleado.nombre}"></td>
+            <td th:text="${empleado.correo}"></td>
+            <td th:text="${empleado.empresa.nombre}"></td>
+            <td th:text="${empleado.rol}"></td>
             <td>
                 <button class="btn btn-primary" type="button">
-                    <a th:href="@{/empresas/edit/{id}(id=${empresa.id})}">Editar</a>
+                    <a th:href="@{/empleados/edit/{id}(id=${empleado.id})}">Editar</a>
                 </button>
             </td>
             <td>
                 <button class="btn btn-primary" type="button">
-                    <a th:href="@{/empresas/delete/{id}(id=${empresa.id})}">Eliminar</a>
+                    <a th:href="@{/empleados/delete/{id}(id=${empleado.id})}">Eliminar</a>
                 </button>
             </td>
         </tr>
     </table>
     <td>
         <button class="btn btn-primary" type="button">
-            <a th:href="@{/empresas/new}">Agregar Empresa</a>
+            <a th:href="@{/empleados/new}">Agregar Empleado</a>
         </button>
     </td>
 </div>
@@ -61,16 +61,16 @@
 
         var msg= [[${message}]];
         if (msg == "saveOK"){
-            Command : toastr["success"]("Empresa creada con éxito!")
+            Command : toastr["success"]("Empleado registrado con éxito!")
             }
         else if (msg == "updateOK"){
-            Command : toastr["success"]("Empresa actualizada con éxito!")
+            Command : toastr["success"]("Empleado actualizado con éxito!")
         }
         else if (msg == "deleteOK"){
-            Command : toastr["error"]("Empresa eliminada con éxito!")
+            Command : toastr["error"]("Empleado eliminado con éxito!")
         }
         else if (msg == "deleteError"){
-            Command : toastr["error"]("Empresa no ha sido eliminada!")
+            Command : toastr["error"]("Empleado no ha sido eliminada!")
         }
         toastr.options={
             "positionClass": "toast-top-right",

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><title>Empleados</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- CSS only -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script crossorigin="anonymous"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <h1> Actualizar Empleado</h1>
+    <form action="#" method="post" th:action="@{/empleados/update}" th:object="${empleado}">
+        <div class="form-group">
+            <label class="control-label" for="id">Id</label>
+            <input class="form-control" id="id" required="required" th:field="*{id}" type="text" readonly>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="nombre">Nombre:</label>
+            <input class="form-control" id="nombre" required="required" th:field="*{nombre}" type="text">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="correo">Correo:</label>
+            <input class="form-control" id="correo" required="required" th:field="*{correo}" type="email">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="empresa">Empresa:</label>
+            <select class="form-control" id="empresa" required="required" th:field="*{empresa}" type="text">
+                <option th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="rol">Rol:</label>
+            <select class="form-control" id="rol" required="required" th:field="*{rol}" type="text">
+                <option  th:value="Admin">Admin</option>
+                <option  th:value="Operario">Operario</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Actualizar</button>
+    </form>
+</div>
+</body>
+
+</html>
