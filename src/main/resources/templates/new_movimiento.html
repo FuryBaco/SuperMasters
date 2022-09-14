@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><title>Movimientos</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- CSS only -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script crossorigin="anonymous"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <h1> Agregar un nuevo Movimiento</h1>
+    <form action="#" method="post" th:action="@{/movimientos/save}" th:object="${movimiento}">
+        <div class="form-group">
+            <label class="control-label" for="monto">Monto:</label>
+            <input class="form-control" id="monto" required="required" th:field="*{monto}" type="number" step="0.01">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="concepto">Concepto:</label>
+            <select class="form-control" id="concepto" required="required" th:field="*{concepto}" type="text">
+                <option th:value="Operativos">Operativos</option>
+                <option th:value="Administrativos">Administrativos</option>
+                <option th:value="Inversion">Inversion</option>
+                <option th:value="Financiacion">Financiacion</option>
+                <option th:value="Otros">Otros</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="empleado">Empleado:</label>
+            <select class="form-control" id="empleado" required="required" th:field="*{empleado}" type="text">
+                <option th:each="empleado : ${empleados}" th:value="${empleado.id}" th:text="${empleado.nombre}"></option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </form>
+</div>
+</body>
+
+</html>

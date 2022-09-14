@@ -32,6 +32,7 @@
             <th>Editar</th>
             <th>Eliminar</th>
             <th>Empleados</th>
+            <th>Movimientos</th>
         </tr>
         <tr th:each="empresa: ${empresas}">
             <td th:text="${empresa.id}"></td>
@@ -44,6 +45,7 @@
                     <a th:href="@{/empresas/edit/{id}(id=${empresa.id})}">Editar</a>
                 </button>
             </td>
+
             <td>
                 <button class="btn btn-primary" type="button">
                     <a th:href="@{/empresas/delete/{id}(id=${empresa.id})}">Eliminar</a>
@@ -53,6 +55,13 @@
                 <button class="btn btn-primary" type="button">
                     <a th:href="@{/empleados/empresa/{id}(id=${empresa.id})}">Empleados</a>
                 </button>
+            </td>
+
+            <td>
+                <button class="btn btn-primary" type="button">
+                    <a th:href="@{/movimientos/empresa/{id}(id=${empresa.id})}">Movimientos</a>
+                </button>
+            </td>
         </tr>
     </table>
     <td>
@@ -61,7 +70,11 @@
         </button>
 
         <button class="btn btn-primary" type="button">
-            <a th:href="@{/empleados}">Empleados</a>
+            <a th:href="@{/empleados}">Ver Empleados</a>
+        </button>
+
+        <button class="btn btn-primary" type="button">
+            <a th:href="@{/movimientos}">Ver Movimientos</a>
         </button>
     </td>
 </div>

@@ -1,9 +1,7 @@
 package com.SuperMasters.Ciclo3.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor @ToString
+@NoArgsConstructor @ToString @AllArgsConstructor
 @Table(name = "empresa")
 public class Empresa {
 
@@ -34,18 +32,14 @@ public class Empresa {
 	@Column(name = "nit", length = 50, nullable = false)
 	private String nit;
 
-	@Getter
+	@Getter @Setter
 	@LastModifiedDate
 	private Date updateAt = new Date();
-	@Getter
+	@Getter @Setter
+	@CreationTimestamp
 	@CreatedDate
 	private Date createdAt = new Date();
 
-	public Empresa(String nombre, String direccion, String telefono, String nit) {
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.nit = nit;
-	}
+
 
 }

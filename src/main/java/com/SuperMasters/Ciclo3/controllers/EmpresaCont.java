@@ -56,7 +56,7 @@ public class EmpresaCont {
 		return "edit_empresa";//Llamamos al archivo edit_empresa.html en la carpeta templates (resources/templates)
 	}
 
-
+	//Editar una empresa en especifico
 	@PatchMapping("/empresas/update")
 	public String updateEmpresa(@ModelAttribute("empresa") Empresa empresa, RedirectAttributes redirectAttributes) {
 		if (empresaServ.saveOrUpdate(empresa)){
@@ -64,7 +64,7 @@ public class EmpresaCont {
 			return "redirect:/empresas";
 		}
 		redirectAttributes.addFlashAttribute("message", "updateError");
-		return "redirect:/empresas";
+		return "redirect:/empresas/edit/" + empresa.getId();
 	}
 
 	//Eliminar una empresa en especifico

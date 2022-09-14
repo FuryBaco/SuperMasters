@@ -29,6 +29,7 @@
             <th>Correo</th>
             <th>Empresa</th>
             <th>Rol</th>
+            <th>Movimientos</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
@@ -38,6 +39,7 @@
             <td th:text="${empleado.correo}"></td>
             <td th:text="${empleado.empresa.nombre}"></td>
             <td th:text="${empleado.rol}"></td>
+            <td><a th:href="@{/movimientos/empleado/{id}(id=${empleado.id})}" class="btn btn-primary">Ver</a></td>
             <td>
                 <button class="btn btn-primary" type="button">
                     <a th:href="@{/empleados/edit/{id}(id=${empleado.id})}">Editar</a>
@@ -56,7 +58,11 @@
         </button>
 
         <button class="btn btn-primary" type="button">
-            <a th:href="@{/empresas}">Regresar</a>
+            <a th:href="@{/empresas}">Ver Empresas</a>
+        </button>
+
+        <button class="btn btn-primary" type="button">
+            <a th:href="@{/movimientos}">Ver Movimientos</a>
         </button>
     </td>
 </div>

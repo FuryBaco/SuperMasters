@@ -1,19 +1,18 @@
 package com.SuperMasters.Ciclo3.entities;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "movimiento")
-@NoArgsConstructor @ToString
+@NoArgsConstructor @ToString @AllArgsConstructor
 public class Movimiento {
 
 	@Id
@@ -34,14 +33,10 @@ public class Movimiento {
 	@JoinColumn(name = "empleado_id")
 	private Empleado empleado;
 
-	public Movimiento(float monto, String concepto, Empleado empleado) {
-		this.monto = monto;
-		this.concepto = concepto;
-		this.empleado = empleado;
-	}
 
-	@LastModifiedDate
+
+	@LastModifiedDate @Setter @Getter
 	private Date updateAt = new Date();
-	@CreatedDate
+	@CreatedDate @Setter @Getter
 	private Date createdAt = new Date();
 }
