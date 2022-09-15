@@ -6,6 +6,10 @@ import com.SuperMasters.Ciclo3.entities.Empresa;
 import com.SuperMasters.Ciclo3.services.EmpleadoServ;
 import com.SuperMasters.Ciclo3.services.EmpresaServ;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.authentication.PasswordEncoderParser;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +51,8 @@ public class EmpleadoCont {
 	//Guardar un empleado en la base de datos y volver a la pagina de empleados
 	@PostMapping("/empleados/save")
 	public String saveEmpleado(Empleado empleado, RedirectAttributes redirectAttributes) {
+		String encryptedPassword = passwordEncoder().encode(empleado.getPassword());
+		empleado.setPassword(encryptedPassword);
 		if (empleadoServ.saveOrUpdate(empleado)){
 			redirectAttributes.addFlashAttribute("message", "saveOK");
 			return "redirect:/empleados";
@@ -68,7 +74,9 @@ public class EmpleadoCont {
 
 	//Actualizar un empleado en la base de datos y volver a la pagina de empleados
 	@PostMapping("/empleados/update")
-	public String updateEmpleado(Empleado empleado, RedirectAttributes redirectAttributes) {
+	public String updateEmpleado(@ModelAttribute("empleado") Empleado empleado, RedirectAttributes redirectAttributes) {
+		String encryptedPassword = passwordEncoder().encode(empleado.getPassword());
+		empleado.setPassword(encryptedPassword);
 		if (empleadoServ.saveOrUpdate(empleado)){
 			redirectAttributes.addFlashAttribute("message", "updateOK");
 			return "redirect:/empleados";
@@ -95,6 +103,12 @@ public class EmpleadoCont {
 		model.addAttribute("empleados", empleados);
 		model.addAttribute("message", message);
 		return "empleados"; //Llamamos al archivo empleados.html en la carpeta templates (resources/templates)
+	}
+
+	//Encriptar contraseña de un empleado
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 }

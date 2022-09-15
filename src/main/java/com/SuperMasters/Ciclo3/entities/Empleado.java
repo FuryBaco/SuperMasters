@@ -13,43 +13,61 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor @ToString
+@NoArgsConstructor
+@ToString
 @Table(name = "empleado")
 public class Empleado {
 
 	@Id
-	@Getter @Setter
+	@Getter
+	@Setter
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Getter @Setter
+	@Getter
+	@Setter
 	@Column(name = "nombre", length = 50, nullable = false)
 	private String nombre;
 
-	@Getter @Setter
+	@Getter
+	@Setter
 	@Column(name = "correo", length = 50, nullable = false, unique = true)
 	private String correo;
 
-	@Getter @Setter
+	@Getter
+	@Setter
 	@ManyToOne
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
-	@Getter @Setter
+	@Getter
+	@Setter
 	@Column(name = "rol", length = 50, nullable = false)
 	private String rol;
 
-	public Empleado(String nombre, String correo, Empresa empresa, String rol) {
+	@Getter
+	@Setter
+	@Column(name = "password", length = 250, nullable = false)
+	private String password;
+
+	@Getter
+	@Setter
+	@Column(name = "status", nullable = false)
+	private Boolean status;
+
+	@Getter
+	@LastModifiedDate
+	private  Date updateAt = new Date();
+
+	@Getter
+	@CreatedDate
+	private  Date createdAt = new Date();
+	public Empleado(String nombre, String correo, Empresa empresa, String rol, String password, Boolean status) {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.empresa = empresa;
 		this.rol = rol;
+		this.password = password;
+		this.status = status;
 	}
-
-	@Getter
-	@LastModifiedDate
-	private Date updateAt = new Date();
-	@Getter
-	@CreatedDate
-	private Date createdAt = new Date();
 }
