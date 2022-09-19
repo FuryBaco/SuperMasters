@@ -5,6 +5,8 @@ import com.SuperMasters.Ciclo3.entities.Empleado;
 import com.SuperMasters.Ciclo3.entities.Empresa;
 import com.SuperMasters.Ciclo3.services.EmpleadoServ;
 import com.SuperMasters.Ciclo3.services.EmpresaServ;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.authentication.PasswordEncoderParser;
@@ -18,9 +20,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.Console;
 import java.util.List;
 
 @Controller
+@DynamicInsert
+@DynamicUpdate
 public class EmpleadoCont {
 
 	@Autowired
@@ -75,8 +80,14 @@ public class EmpleadoCont {
 	//Actualizar un empleado en la base de datos y volver a la pagina de empleados
 	@PostMapping("/empleados/update")
 	public String updateEmpleado(@ModelAttribute("empleado") Empleado empleado, RedirectAttributes redirectAttributes) {
-		String encryptedPassword = passwordEncoder().encode(empleado.getPassword());
-		empleado.setPassword(encryptedPassword);
+		Long id = empleado.getId();
+		String dataBasePass = empleadoServ.getById(id).getPassword();
+		System.out.println(dataBasePass);
+		System.out.println(empleado.getPassword());
+		if (!empleado.getPassword().equals(dataBasePass)){
+			String encryptedPassword = passwordEncoder().encode(empleado.getPassword());
+			empleado.setPassword(encryptedPassword);
+		}
 		if (empleadoServ.saveOrUpdate(empleado)){
 			redirectAttributes.addFlashAttribute("message", "updateOK");
 			return "redirect:/empleados";

@@ -27,6 +27,7 @@ a {
 
 <body>
 <div class="container-fluid"><h1> Lista de Empresas</h1><!--Dibujamos la tabla-->
+    <p th:inline="text" class="text-right">User: [[${#httpServletRequest.remoteUser}]]</p>
     <table class="table">
         <tr>
             <th>ID</th>

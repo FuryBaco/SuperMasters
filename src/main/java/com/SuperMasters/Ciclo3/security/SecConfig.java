@@ -1,10 +1,12 @@
 package com.SuperMasters.Ciclo3.security;
 
+import com.SuperMasters.Ciclo3.handler.CustomHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -15,8 +17,10 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 
-public class SecConfig implements WebMvcConfigurer {
+public class SecConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	CustomHandler customHandler;
 	@Autowired
 	private DataSource dataSource;
 
@@ -39,13 +43,19 @@ public class SecConfig implements WebMvcConfigurer {
 		registry.addViewController("/login").setViewName("login");
 	}*/
 
-
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.anyRequest().authenticated()
+				.antMatchers("/empresas**").hasRole("ADMIN")
+				.antMatchers("/empleados**").hasRole("ADMIN")
+				.antMatchers("/movimientos**").hasAnyRole("ADMIN","USER")
 				.and()
-				.formLogin().permitAll()
+				.formLogin().successHandler(customHandler)
 				.and()
-				.logout().permitAll();
+				.exceptionHandling().accessDeniedPage("/accessDenied")
+				.and()
+				.logout().permitAll()
+				.and()
+				.csrf();
 	}
 }

@@ -78,4 +78,8 @@ public class EmpresaCont {
 		return "redirect:/empresas";
 	}
 
+	@RequestMapping(value = "accessDenied")
+	public String accessDenied() {
+		return "accessDenied";
+	}
 }
